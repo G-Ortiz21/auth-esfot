@@ -1,13 +1,13 @@
 import { useState } from "react";
 import {
   View, Text, StyleSheet, KeyboardAvoidingView,
-  Platform, Alert, TouchableOpacity
+  Alert, TouchableOpacity
 } from "react-native";
 import { router }            from "expo-router";
-import { useForgotPassword } from "@/features/auth/model/useForgotPassword";
+import { useForgotPassword } from "@/features/auth";
 import { Input }             from "@/shared/ui/Input";
 import { Button }            from "@/shared/ui/Button";
-import { theme }             from "@/core/styles/theme";
+import { theme }             from "@/shared/config/theme";
  
 export const ForgotPasswordPage = () => {
   const [email,   setEmail]   = useState("");

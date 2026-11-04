@@ -1,8 +1,10 @@
 import { createClient } from "@supabase/supabase-js";
 import * as SecureStore from "expo-secure-store";
+import { Platform } from "react-native";
  
 const supabaseUrl     = process.env.EXPO_PUBLIC_SUPABASE_URL!;
 const supabaseAnonKey = process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY!;
+const isWeb = Platform.OS === "web";
  
 /**
  * Adaptador que conecta el sistema de storage de Supabase Auth
@@ -22,9 +24,9 @@ const SecureStoreAdapter = {
  
 export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
   auth: {
-    storage:           SecureStoreAdapter,
+    ...(!isWeb && { storage: SecureStoreAdapter }),
     autoRefreshToken:  true,   // Renueva el access_token automáticamente
     persistSession:    true,   // Persiste la sesión entre reinicios de la app
-    detectSessionInUrl: false, // En React Native NO hay URL; deshabilitar
+    detectSessionInUrl: isWeb,
   },
 });

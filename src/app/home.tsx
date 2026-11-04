@@ -1,3 +1,3 @@
-import { HomePage } from "@/pages/home/ui/HomePage";
+import { HomePage } from "@/pages/home";
  
 export default HomePage;

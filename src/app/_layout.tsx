@@ -1,8 +1,7 @@
 import { useEffect } from "react";
-import { Stack }     from "expo-router";
-import { router }    from "expo-router";
-import { QueryProvider } from "@/core/providers/QueryProvider";
-import { useSession }    from "@/features/session/model/useSession";
+import { router, Stack } from "expo-router";
+import { QueryProvider } from "@/shared/lib/QueryProvider";
+import { SessionProvider, useSession } from "@/features/session";
  
 // Componente interno que maneja la redirección basada en auth.
 // Está dentro de QueryProvider para poder usar useSession.
@@ -27,15 +26,17 @@ function AuthGuard() {
 export default function RootLayout() {
   return (
     <QueryProvider>
-      <Stack screenOptions={{ headerShown: false }}>
-        {/* Grupo de rutas de autenticación */}
-        <Stack.Screen name="(auth)" />
-        {/* Pantalla principal */}
-        <Stack.Screen name="home"  />
-        {/* Ruta índice: solo redirige, no muestra nada */}
-        <Stack.Screen name="index" />
-      </Stack>
-      <AuthGuard />
+      <SessionProvider>
+        <Stack screenOptions={{ headerShown: false }}>
+          {/* Grupo de rutas de autenticación */}
+          <Stack.Screen name="(auth)" />
+          {/* Pantalla principal */}
+          <Stack.Screen name="home"  />
+          {/* Ruta índice: solo redirige, no muestra nada */}
+          <Stack.Screen name="index" />
+        </Stack>
+        <AuthGuard />
+      </SessionProvider>
     </QueryProvider>
   );
 }

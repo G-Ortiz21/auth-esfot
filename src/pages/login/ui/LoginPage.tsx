@@ -1,13 +1,13 @@
 import { useState } from "react";
 import {
   View, Text, StyleSheet, KeyboardAvoidingView,
-  Platform, Alert, TouchableOpacity, ScrollView
+  Alert, TouchableOpacity, ScrollView
 } from "react-native";
 import { router }          from "expo-router";
-import { useLogin }        from "@/features/auth/model/useLogin";
+import { useLogin }        from "@/features/auth";
 import { Input }           from "@/shared/ui/Input";
 import { Button }          from "@/shared/ui/Button";
-import { theme }           from "@/core/styles/theme";
+import { theme }           from "@/shared/config/theme";
  
 export const LoginPage = () => {
   const [email,    setEmail]    = useState("");

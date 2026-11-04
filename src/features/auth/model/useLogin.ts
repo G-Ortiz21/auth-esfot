@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/shared/api/supabase";
-import { SESSION_QUERY_KEY } from "@/features/session/model/useSession";
+import { SESSION_QUERY_KEY } from "@/shared/lib/sessionQueryKey";
  
 interface LoginCredentials {
   email:    string;

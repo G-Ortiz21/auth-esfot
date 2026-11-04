@@ -1,8 +1,9 @@
 import { useConfirmEmail } from "@/features/confirm-email/model/useConfirmEmail";
 import type { CSSProperties } from "react";
+import { Link } from "react-router-dom";
  
 export const ConfirmEmailPage = () => {
-  const { status, error } = useConfirmEmail();
+  const { status, error, warning } = useConfirmEmail();
  
   const content = () => {
     if (status === "loading") return (
@@ -17,6 +18,7 @@ export const ConfirmEmailPage = () => {
         <div style={{ fontSize:"48px", marginBottom:"16px" }}>❌</div>
         <h2 style={{ color:"#DC2626" }}>Link inválido</h2>
         <p style={{ color:"#64748B" }}>{error}</p>
+        <Link to="/" style={returnLink}>Volver al inicio</Link>
       </div>
     );
     return (
@@ -31,6 +33,10 @@ export const ConfirmEmailPage = () => {
         <p style={{ color:"#64748B", fontWeight:"600" }}>
           Regresa a la aplicación móvil e inicia sesión.
         </p>
+        {warning && <p role="status" style={{ color:"#B45309" }}>{warning}</p>}
+        <a href="authesfot:///login" style={returnLink}>
+          Abrir la aplicación e iniciar sesión
+        </a>
       </div>
     );
   };
@@ -67,4 +73,10 @@ const card: CSSProperties = {
 const header: CSSProperties = {
   background: "linear-gradient(135deg, #1B3A6B 0%, #2563EB 100%)",
   padding: "28px 32px", textAlign: "center",
+};
+const returnLink: CSSProperties = {
+  display: "inline-block",
+  color: "#2563EB",
+  fontWeight: 600,
+  marginTop: "20px",
 };

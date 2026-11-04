@@ -1,3 +1,3 @@
-import { ForgotPasswordPage } from "@/pages/forgot-password/ui/ForgotPasswordPage";
+import { ForgotPasswordPage } from "@/pages/forgot-password";
  
 export default ForgotPasswordPage;

@@ -1,5 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { supabase } from "@/shared/api/supabase";
+import { isPasswordValid, PASSWORD_POLICY_ERROR } from "./passwordPolicy";
  
 interface RegisterCredentials {
   email:    string;
@@ -9,6 +10,10 @@ interface RegisterCredentials {
 export const useRegister = () => {
   return useMutation({
     mutationFn: async ({ email, password }: RegisterCredentials) => {
+      if (!isPasswordValid(password)) {
+        throw new Error(PASSWORD_POLICY_ERROR);
+      }
+
       const { data, error } = await supabase.auth.signUp({
         email: email.trim().toLowerCase(),
         password,

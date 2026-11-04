@@ -1,10 +1,10 @@
 import {
   View, Text, StyleSheet, SafeAreaView,
-  TouchableOpacity, Alert
+  Alert
 } from "react-native";
-import { useSession } from "@/features/session/model/useSession";
+import { useSession } from "@/features/session";
 import { Button }     from "@/shared/ui/Button";
-import { theme }      from "@/core/styles/theme";
+import { theme }      from "@/shared/config/theme";
  
 export const HomePage = () => {
   const { user, signOut } = useSession();

@@ -1,13 +1,13 @@
 import { useState } from "react";
 import {
   View, Text, StyleSheet, KeyboardAvoidingView,
-  Platform, Alert, TouchableOpacity, ScrollView
+  Alert, TouchableOpacity, ScrollView
 } from "react-native";
 import { router }       from "expo-router";
-import { useRegister }  from "@/features/auth/model/useRegister";
+import { isPasswordValid, PASSWORD_POLICY_ERROR, PasswordRequirements, useRegister } from "@/features/auth";
 import { Input }        from "@/shared/ui/Input";
 import { Button }       from "@/shared/ui/Button";
-import { theme }        from "@/core/styles/theme";
+import { theme }        from "@/shared/config/theme";
  
 export const RegisterPage = () => {
   const [email,    setEmail]    = useState("");
@@ -21,8 +21,8 @@ export const RegisterPage = () => {
       Alert.alert("Campos requeridos", "Completa todos los campos.");
       return;
     }
-    if (password.length < 8) {
-      Alert.alert("Contraseña débil", "Mínimo 8 caracteres.");
+    if (!isPasswordValid(password)) {
+      Alert.alert("Contraseña no válida", PASSWORD_POLICY_ERROR);
       return;
     }
     if (password !== confirm) {
@@ -76,6 +76,7 @@ export const RegisterPage = () => {
             <Input label="Contraseña" value={password}
               onChangeText={setPassword} secureTextEntry
               placeholder="Mínimo 8 caracteres" />
+            <PasswordRequirements password={password} />
             <Input label="Confirmar contraseña" value={confirm}
               onChangeText={setConfirm} secureTextEntry
               placeholder="Repite tu contraseña" />
